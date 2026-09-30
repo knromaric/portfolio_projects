@@ -1,0 +1,74 @@
+version: 2
+
+models:
+  - name: silver_orders
+    description: "View of orders. One row per order."
+    columns: 
+      - name: order_id
+        description: "Unique order identifier"
+        tests: [unique, not_null]
+      - name: customer_id
+        description: "Foreign key to customer"
+        tests: 
+          - not_null
+          - relationships: 
+              arguments: 
+                  to: ref('scd_customers')
+                  field: customer_id 
+      - name: order_date
+        description: "Date the order was placed"
+        tests: [not_null]
+      - name: status 
+        description: "Order Status (e.g. 'delivered', 'shipped', 'processing')"
+        tests: 
+          - accepted_values:
+              arguments: 
+                  values: ['delivered', 'shipped', 'processing', 'returned', 'cancelled']
+      - name: total_amount
+        description: "Total order amount in currency"
+
+  - name: silver_order_items
+    description: "View of order line items. One row per product per order"
+    columns: 
+      - name: order_item_id
+        description: "Unique order line identifier"
+        tests: [unique, not_null]
+      - name: order_id
+        description: "Foreign key to order"
+        tests: 
+          - not_null
+          - relationships: 
+              arguments: 
+                  to: ref('silver_orders')
+                  field: order_id
+      - name: product_id
+        description: "Foreign key to product"
+        tests: 
+          - not_null 
+          - relationships: 
+              arguments: 
+                  to: ref('silver_products')
+                  field: product_id
+      - name: quantity
+        description: "Quantity ordered"
+        tests: [not_null]
+      - name: unit_price
+        description: "Unit price at time of order"
+
+  - name: silver_products
+    description: "View of products. One row per product"
+    columns: 
+      - name: product_id
+        description: "Unique product identifier"
+        tests: [unique, not_null] 
+      - name: product_name
+        description: "product display name"
+      - name: category
+        description: "product category"
+      - name: price 
+        description: "Current product price"
+
+  - name: silver_int_orders_enriched
+    description: "Orders joined with customers and order-item aggregates. One row per order."
+  - name: silver_int_order_items_with_product
+    description: "Order line items with product and order context. One row per line"
