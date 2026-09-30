@@ -1,4 +1,4 @@
-# Data & Analytics Portfolio — Romaric Nzekeng
+# Data & Analytics Portfolio
 
 A collection of hands-on data projects spanning the full analytics stack — from raw data to governed data warehouses to executive dashboards. Each project was built independently to develop and demonstrate practical skills in SQL, Python, dbt, Databricks, and Power BI, applied to realistic business scenarios (e-commerce, supply chain, retail, customer analytics).
 
@@ -72,7 +72,3 @@ Read top to bottom, the four projects trace one continuous skill progression:
 
 Each project folder is self-contained with its own README, setup instructions, and (where applicable) sample data. Start with the project's own README for exact setup steps — prerequisites and run instructions differ by stack (SQL Server vs. Databricks).
 
-## Contact
-
-**Romaric Nzekeng** — IT Business Analyst · Databricks Certified Data Engineer Associate
-[GitHub](https://github.com/knromaric)
